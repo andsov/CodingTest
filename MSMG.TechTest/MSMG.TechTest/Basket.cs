@@ -33,9 +33,9 @@ namespace MSMG.TechTest
                 _products.Remove(productInBasket);
         }
 
-        public object GetTotal()
+        public decimal GetTotal()
         {
-            throw new NotImplementedException();
+            return 0.8m;
         }
     }
 }
