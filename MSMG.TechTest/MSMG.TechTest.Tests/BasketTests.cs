@@ -153,5 +153,27 @@ namespace MSMG.TechTest.Tests
 
             basket.GetTotal().ShouldBe(9.00m);
         }
+
+        [Fact]
+        public void GetTotal_Returns_The_Basket_Total_When_No_Products_Added()
+        {
+            var basket = new Basket();
+
+            basket.GetTotal().ShouldBe(0m);
+        }
+
+        [Fact]
+        public void GetTotal_Returns_The_Basket_Total_With_Discounts_When_No_Products_Added()
+        {
+            var discounts = new List<IDiscount>
+            {
+                new ProductPercentageDiscount(),
+                new ProductForFreeDiscount()
+            };
+
+            var basket = new Basket(discounts);
+
+            basket.GetTotal().ShouldBe(0m);
+        }
     }
 }
