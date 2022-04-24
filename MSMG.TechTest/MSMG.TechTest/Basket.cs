@@ -18,7 +18,14 @@ namespace MSMG.TechTest
 
         public int TotalNumberOfProducts()
         {
-            return _products.Sum(product => product.Quantity);
+            return _products.Sum(p => p.Quantity);
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            var productInBasket = _products.FirstOrDefault(p => p.Id == product.Id);
+
+            _products.Remove(productInBasket);
         }
     }
 }
