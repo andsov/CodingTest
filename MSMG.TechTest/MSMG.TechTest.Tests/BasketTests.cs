@@ -35,5 +35,19 @@ namespace MSMG.TechTest.Tests
 
             basket.TotalNumberOfProducts().ShouldBe(2);
         }
+
+        [Fact]
+        public void RemoveProduct_Successfully_Removes_Product_From_Basket()
+        {
+            var basket = new Basket();
+
+            var product = new Product(1, "Butter", 0.8m);
+
+            basket.AddProduct(product);
+
+            basket.RemoveProduct(product);
+
+            basket.TotalNumberOfProducts().ShouldBe(0);
+        }
     }
 }
