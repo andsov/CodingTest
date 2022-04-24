@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Shouldly;
+using System;
 
 namespace MSMG.TechTest.Tests
 {
@@ -60,6 +61,18 @@ namespace MSMG.TechTest.Tests
             basket.RemoveProduct(new Product(1, "Butter", 0.8m, 1));
 
             basket.TotalNumberOfProducts().ShouldBe(1);
+        }
+
+        [Fact]
+        public void RemoveProduct_Should_Throw_Error_If_Attempting_To_Remove_Product_Not_In_Basket()
+        {
+            const string expectedErrorMessage = "Product Butter not present in basket";
+
+            var basket = new Basket();
+
+            var exception = Should.Throw<Exception>(() => basket.RemoveProduct(new Product(1, "Butter", 0.8m, 1)));
+
+            exception.Message.ShouldBe(expectedErrorMessage);
         }
     }
 }
