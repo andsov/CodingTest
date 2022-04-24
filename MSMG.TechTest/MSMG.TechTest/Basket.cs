@@ -4,18 +4,21 @@ namespace MSMG.TechTest
 {
     public class Basket
     {
+        private IList<Product> _products;
+
         public Basket()
         {
+            _products = new List<Product>();
         }
 
         public void AddProduct(Product product)
         {
-            
+            _products.Add(product);
         }
 
-        public object TotalNumberOfProducts()
+        public int TotalNumberOfProducts()
         {
-            return 1;
+            return _products.Count;
         }
     }
 }
