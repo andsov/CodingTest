@@ -1,14 +1,17 @@
-﻿using System;
+﻿using MSMG.TechTest.Discounts;
+using System;
 
 namespace MSMG.TechTest
 {
     public class Basket
     {
         private IList<Product> _products;
+        private ProductPercentageDiscount _productPercentageDiscount;
 
         public Basket()
         {
             _products = new List<Product>();
+            _productPercentageDiscount = new ProductPercentageDiscount();
         }
 
         public void AddProduct(Product product)
@@ -35,12 +38,7 @@ namespace MSMG.TechTest
 
         public decimal GetTotal()
         {
-            var discount = 0m;
-            var butterQuantity = _products.Where(p => p.Name == "Butter").Select(p => p.Quantity).Sum();
-            var bread = _products.FirstOrDefault(p => p.Name == "Bread");
-
-            if (butterQuantity >= 2)
-                discount += (bread?.Price ?? 0m) * 0.5m;
+            var discount = _productPercentageDiscount.CalculateDiscount(_products);
 
             return _products.Select(p => p.Quantity * p.Price).Sum() - discount;
         }
