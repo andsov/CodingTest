@@ -35,7 +35,7 @@ namespace MSMG.TechTest
 
         public decimal GetTotal()
         {
-            return 0.8m;
+            return _products.Sum(p => p.Price);
         }
     }
 }
