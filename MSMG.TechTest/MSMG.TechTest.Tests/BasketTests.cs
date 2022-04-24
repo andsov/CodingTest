@@ -103,8 +103,10 @@ namespace MSMG.TechTest.Tests
             basket.GetTotal().ShouldBe(2.95m);
         }
 
-        [Fact]
-        public void GetTotal_Returns_The_Basket_Total_Price_With_Discount_Applied_For_Two_Butter_And_Two_Bread()
+        [Theory]
+        [InlineData(2, 2, 3.1)]
+        [InlineData(4, 2, 4.2)]
+        public void GetTotal_Returns_The_Basket_Total_Price_With_Discount_Applied_For_Butter_And_Bread(int butterQuantity, int breadQuantity, decimal expectedTotal)
         {
             var discounts = new List<IDiscount>
             {
@@ -113,10 +115,10 @@ namespace MSMG.TechTest.Tests
 
             var basket = new Basket(discounts);
 
-            basket.AddProduct(new Product(1, "Butter", 0.8m, 2));
-            basket.AddProduct(new Product(3, "Bread", 1.0m, 2));
+            basket.AddProduct(new Product(1, "Butter", 0.8m, butterQuantity));
+            basket.AddProduct(new Product(3, "Bread", 1.0m, breadQuantity));
 
-            basket.GetTotal().ShouldBe(3.1m);
+            basket.GetTotal().ShouldBe(expectedTotal);
         }
 
         [Fact]
@@ -150,22 +152,6 @@ namespace MSMG.TechTest.Tests
             basket.AddProduct(new Product(3, "Bread", 1.0m));
 
             basket.GetTotal().ShouldBe(9.00m);
-        }
-
-        [Fact]
-        public void GetTotal_Returns_The_Basket_Total_Price_With_Discount_Applied_For_Four_Butter_And_Two_Bread()
-        {
-            var discounts = new List<IDiscount>
-            {
-                new ProductPercentageDiscount()
-            };
-
-            var basket = new Basket(discounts);
-
-            basket.AddProduct(new Product(1, "Butter", 0.8m, 4));
-            basket.AddProduct(new Product(3, "Bread", 1.0m, 2));
-
-            basket.GetTotal().ShouldBe(4.2m);
         }
     }
 }
