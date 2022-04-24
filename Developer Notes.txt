@@ -1,0 +1,19 @@
+- As to not do too much for the sake of implementing the scenarios I've not done additional refactoring which I see can be left for future
+work.
+
+- The ProductForFreeDiscount and ProductPercentageDiscount could potentially be made into base classes in the future to allow for inheritance
+and creations of more specific sub discounts of these types.
+
+- I was also thinking of creating e.g. a BasketCalculator that takes the discounts instead and also add a method to retrieve the items from the
+basket in order to get the price and quantity and to be able to apply the discounts.
+
+- I left out doing a method for displaying the basket items for now for as the focus for the task was more on the calculations needed to be done.
+
+- I was also thining of splitting out the quantity from the Product and creating a LineItem/LineProduct that takes the Product and the quantity.
+
+- When instantiating the discounts I can pass in the Product(s) via constructor to which the specific discounts should apply to make it 
+more generic and avoid e.g. statements such as Where(p => p.Name == "Butter").
+
+- I was also thinking that the products could be retrieved from an Inventory before being added to the shopping basket as LineItem/LineProduct.
+
+- 
