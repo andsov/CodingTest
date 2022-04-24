@@ -25,7 +25,9 @@ namespace MSMG.TechTest
         {
             var productInBasket = _products.FirstOrDefault(p => p.Id == product.Id);
 
-            if (productInBasket.Quantity > 1)
+            if (productInBasket == null)
+                throw new Exception($"Product {product.Name} not present in basket");
+            else if (productInBasket.Quantity > 1)
                 productInBasket.DecrementQuantity();
             else
                 _products.Remove(productInBasket);
