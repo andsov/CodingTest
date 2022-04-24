@@ -75,16 +75,18 @@ namespace MSMG.TechTest.Tests
             exception.Message.ShouldBe(expectedErrorMessage);
         }
 
-        [Fact]
-        public void GetTotal_Returns_The_Basket_Total_Price_For_A_Product()
+        [Theory]
+        [InlineData(1, 0.8)]
+        [InlineData(2, 1.6)]
+        public void GetTotal_Returns_The_Basket_Total_Price_For_A_Product(int quantity, decimal expectedTotal)
         {
             var basket = new Basket();
 
-            var product = new Product(1, "Butter", 0.8m);
+            var product = new Product(1, "Butter", 0.8m, quantity);
 
             basket.AddProduct(product);
 
-            basket.GetTotal().ShouldBe(0.8m);
+            basket.GetTotal().ShouldBe(expectedTotal);
         }
 
         [Fact]
@@ -97,18 +99,6 @@ namespace MSMG.TechTest.Tests
             basket.AddProduct(new Product(3, "Bread", 1.0m));
 
             basket.GetTotal().ShouldBe(2.95m);
-        }
-
-        [Fact]
-        public void GetTotal_Returns_The_Basket_Total_Price_For_Multiple_Quantity_Of_A_Product()
-        {
-            var basket = new Basket();
-
-            var product = new Product(1, "Butter", 0.8m, 2);
-
-            basket.AddProduct(product);
-
-            basket.GetTotal().ShouldBe(1.6m);
         }
     }
 }
