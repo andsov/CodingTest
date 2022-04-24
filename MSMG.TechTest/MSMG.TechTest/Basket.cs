@@ -35,7 +35,14 @@ namespace MSMG.TechTest
 
         public decimal GetTotal()
         {
-            return _products.Select(p => p.Quantity * p.Price).Sum();
+            var discount = 0m;
+            var butterQuantity = _products.Where(p => p.Name == "Butter").Select(p => p.Quantity).Sum();
+            var bread = _products.FirstOrDefault(p => p.Name == "Bread");
+
+            if (butterQuantity >= 2)
+                discount += (bread?.Price ?? 0m) * 0.5m;
+
+            return _products.Select(p => p.Quantity * p.Price).Sum() - discount;
         }
     }
 }
