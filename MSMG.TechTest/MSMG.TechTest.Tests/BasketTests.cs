@@ -74,5 +74,17 @@ namespace MSMG.TechTest.Tests
 
             exception.Message.ShouldBe(expectedErrorMessage);
         }
+
+        [Fact]
+        public void GetTotal_Returns_The_Basket_Total_Price_For_A_Product()
+        {
+            var basket = new Basket();
+
+            var product = new Product(1, "Butter", 0.8m);
+
+            basket.AddProduct(product);
+
+            basket.GetTotal().ShouldBe(0.8m);
+        }
     }
 }

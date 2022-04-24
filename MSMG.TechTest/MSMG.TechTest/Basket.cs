@@ -32,5 +32,10 @@ namespace MSMG.TechTest
             else
                 _products.Remove(productInBasket);
         }
+
+        public object GetTotal()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
