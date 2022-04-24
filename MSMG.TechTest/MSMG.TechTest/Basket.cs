@@ -40,6 +40,11 @@ namespace MSMG.TechTest
         {
             var discount = _productPercentageDiscount.CalculateDiscount(_products);
 
+            var milk = _products.FirstOrDefault(p => p.Name == "Milk");
+
+            if (milk != null && milk.Quantity >= 4)
+                discount += milk.Price;
+
             return _products.Select(p => p.Quantity * p.Price).Sum() - discount;
         }
     }
