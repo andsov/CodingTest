@@ -1,6 +1,6 @@
-﻿namespace MSMG.TechTest.Tests
+﻿namespace MSMG.TechTest
 {
-    internal class Product
+    public class Product
     {
         public Product()
         {
