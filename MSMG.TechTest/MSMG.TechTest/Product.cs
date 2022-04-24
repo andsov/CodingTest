@@ -8,7 +8,12 @@
             Quantity = quantity;
         }
 
-        public int Quantity { get; internal set; }
-        public object Id { get; internal set; }
+        public int Quantity { get; private set; }
+        public int Id { get; }
+
+        public void DecrementQuantity()
+        {
+            Quantity--;
+        }
     }
 }

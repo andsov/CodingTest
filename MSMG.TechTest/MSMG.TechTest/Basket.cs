@@ -25,7 +25,10 @@ namespace MSMG.TechTest
         {
             var productInBasket = _products.FirstOrDefault(p => p.Id == product.Id);
 
-            _products.Remove(productInBasket);
+            if (productInBasket.Quantity > 1)
+                productInBasket.DecrementQuantity();
+            else
+                _products.Remove(productInBasket);
         }
     }
 }
