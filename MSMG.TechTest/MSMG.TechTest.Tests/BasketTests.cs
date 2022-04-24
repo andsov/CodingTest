@@ -1,6 +1,8 @@
 ﻿using Xunit;
 using Shouldly;
 using System;
+using MSMG.TechTest.Discounts;
+using System.Collections.Generic;
 
 namespace MSMG.TechTest.Tests
 {
@@ -104,7 +106,12 @@ namespace MSMG.TechTest.Tests
         [Fact]
         public void GetTotal_Returns_The_Basket_Total_Price_With_Discount_Applied_For_Two_Butter_And_Two_Bread()
         {
-            var basket = new Basket();
+            var discounts = new List<IDiscount>
+            {
+                new ProductPercentageDiscount()
+            };
+
+            var basket = new Basket(discounts);
 
             basket.AddProduct(new Product(1, "Butter", 0.8m, 2));
             basket.AddProduct(new Product(3, "Bread", 1.0m, 2));
@@ -115,7 +122,12 @@ namespace MSMG.TechTest.Tests
         [Fact]
         public void GetTotal_Returns_The_Basket_Total_Price_With_Discount_Applied_For_Getting_The_Fourth_Milk_Free()
         {
-            var basket = new Basket();
+            var discounts = new List<IDiscount>
+            {
+                new ProductForFreeDiscount()
+            };
+
+            var basket = new Basket(discounts);
 
             basket.AddProduct(new Product(2, "Milk", 1.15m, 4));
 
@@ -125,7 +137,13 @@ namespace MSMG.TechTest.Tests
         [Fact]
         public void GetTotal_Returns_The_Basket_Total_Price_With_All_Discounts_Applied()
         {
-            var basket = new Basket();
+            var discounts = new List<IDiscount>
+            {
+                new ProductPercentageDiscount(),
+                new ProductForFreeDiscount()
+            };
+
+            var basket = new Basket(discounts);
 
             basket.AddProduct(new Product(1, "Butter", 0.8m, 2));
             basket.AddProduct(new Product(2, "Milk", 1.15m, 8));

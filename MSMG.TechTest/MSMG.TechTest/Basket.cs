@@ -8,14 +8,10 @@ namespace MSMG.TechTest
         private IList<Product> _products;
         private IList<IDiscount> _discounts;
 
-        public Basket()
+        public Basket(IList<IDiscount>? discounts = null)
         {
             _products = new List<Product>();
-            _discounts = new List<IDiscount>
-            {
-                new ProductPercentageDiscount(),
-                new ProductForFreeDiscount()
-            };
+            _discounts = discounts ?? new List<IDiscount>();
         }
 
         public void AddProduct(Product product)
