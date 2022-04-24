@@ -111,5 +111,15 @@ namespace MSMG.TechTest.Tests
 
             basket.GetTotal().ShouldBe(3.1m);
         }
+
+        [Fact]
+        public void GetTotal_Returns_The_Basket_Total_Price_With_Discount_Applied_For_Getting_The_Fourth_Milk_Free()
+        {
+            var basket = new Basket();
+
+            basket.AddProduct(new Product(2, "Milk", 1.15m, 4));
+
+            basket.GetTotal().ShouldBe(3.45m);
+        }
     }
 }
