@@ -121,5 +121,17 @@ namespace MSMG.TechTest.Tests
 
             basket.GetTotal().ShouldBe(3.45m);
         }
+
+        [Fact]
+        public void GetTotal_Returns_The_Basket_Total_Price_With_All_Discounts_Applied()
+        {
+            var basket = new Basket();
+
+            basket.AddProduct(new Product(1, "Butter", 0.8m, 2));
+            basket.AddProduct(new Product(2, "Milk", 1.15m, 8));
+            basket.AddProduct(new Product(3, "Bread", 1.0m));
+
+            basket.GetTotal().ShouldBe(9.00m);
+        }
     }
 }
