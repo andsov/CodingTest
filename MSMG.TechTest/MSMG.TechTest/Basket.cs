@@ -6,12 +6,16 @@ namespace MSMG.TechTest
     public class Basket
     {
         private IList<Product> _products;
-        private ProductPercentageDiscount _productPercentageDiscount;
+        private IList<IDiscount> _discounts;
 
         public Basket()
         {
             _products = new List<Product>();
-            _productPercentageDiscount = new ProductPercentageDiscount();
+            _discounts = new List<IDiscount>
+            {
+                new ProductPercentageDiscount(),
+                new ProductForFreeDiscount()
+            };
         }
 
         public void AddProduct(Product product)
@@ -38,12 +42,7 @@ namespace MSMG.TechTest
 
         public decimal GetTotal()
         {
-            var discount = _productPercentageDiscount.CalculateDiscount(_products);
-
-            var milk = _products.FirstOrDefault(p => p.Name == "Milk");
-
-            if (milk != null && milk.Quantity >= 4)
-                discount += milk.Price;
+            var discount = _discounts.Select(d => d.CalculateDiscount(_products)).Sum();
 
             return _products.Select(p => p.Quantity * p.Price).Sum() - discount;
         }

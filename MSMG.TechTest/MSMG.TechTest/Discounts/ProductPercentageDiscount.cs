@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MSMG.TechTest.Discounts
+﻿namespace MSMG.TechTest.Discounts
 {
-    public class ProductPercentageDiscount
+    public class ProductPercentageDiscount : IDiscount
     {
         public decimal CalculateDiscount(IList<Product> products)
         {
