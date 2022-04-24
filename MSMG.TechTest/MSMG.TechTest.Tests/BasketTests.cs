@@ -10,7 +10,7 @@ namespace MSMG.TechTest.Tests
         {
             var basket = new Basket();
 
-            basket.AddProduct(new Product());
+            basket.AddProduct(new Product(1, "Butter", 0.8m));
 
             basket.TotalNumberOfProducts().ShouldBe(1);
         }
@@ -20,8 +20,18 @@ namespace MSMG.TechTest.Tests
         {
             var basket = new Basket();
 
-            basket.AddProduct(new Product());
-            basket.AddProduct(new Product());
+            basket.AddProduct(new Product(1, "Butter", 0.8m));
+            basket.AddProduct(new Product(2, "Milk", 1.15m));
+
+            basket.TotalNumberOfProducts().ShouldBe(2);
+        }
+
+        [Fact]
+        public void AddProduct_Successfully_Adds_More_Than_One_Of_A_Product_To_Basket()
+        {
+            var basket = new Basket();
+
+            basket.AddProduct(new Product(1, "Butter", 0.8m, 2));
 
             basket.TotalNumberOfProducts().ShouldBe(2);
         }
