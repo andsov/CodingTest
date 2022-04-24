@@ -18,7 +18,7 @@ namespace MSMG.TechTest
 
         public int TotalNumberOfProducts()
         {
-            return _products.Count;
+            return _products.Sum(product => product.Quantity);
         }
     }
 }
